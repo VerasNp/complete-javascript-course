@@ -66,33 +66,77 @@
 //   console.log('All products deleted');
 // }
 
-console.log(this); // POints to window
+// console.log(this); // POints to window
 
-const calcAge = function (birthYear) {
-  console.log(2037 - birthYear);
-  console.log(this); // Undefined
-};
-calcAge(1991);
+// const calcAge = function (birthYear) {
+//   console.log(2037 - birthYear);
+//   console.log(this); // Undefined
+// };
+// calcAge(1991);
 
-const calcAgeArrow = birthYear => {
-  console.log(2037 - birthYear);
-  console.log(this); // Window (lexical this)
-};
-calcAgeArrow(1991);
+// const calcAgeArrow = birthYear => {
+//   console.log(2037 - birthYear);
+//   console.log(this); // Window (lexical this)
+// };
+// calcAgeArrow(1991);
+
+// const some = {
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//   },
+// };
+// some.calcAge(); // 'some' object
+
+// const foo = {
+//   year: 2017,
+// };
+
+// // Method borrowing
+// foo.calcAge = some.calcAge;
+
+// foo.calcAge(); // 'foo' object
 
 const some = {
+  firstName: 'some',
   year: 1991,
   calcAge: function () {
     console.log(this);
+    // const isMillenial = function () {
+    //     console.log(this); // undefined
+    //   console.log(this.year >= 1981 && this.year <= 1996);
+    // };
+    // first solution: use an aux variable
+    // const self = this; // self or that
+    // const isMillenial = function () {
+    //     console.log(self); // undefined
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+    // second solution: arrow
+    const isMillenial = () => {
+      console.log(this); // undefined
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
+  },
+
+  //   greet: () => {
+  //     console.log(this); // window
+  //     console.log(`hey ${this.firstName}`); // hey undifined
+  //   },
+  greet: function (params) {
+    console.log(this); // window
+    console.log(`hey ${this.firstName}`); // hey some
   },
 };
-some.calcAge(); // 'some' object
+some.greet();
+some.calcAge();
+console.log(this); // window
 
-const foo = {
-  year: 2017,
+//Arguments keyword
+const addExpression = function addExp(a, b) {
+  console.log(arguments);
+  return a + b;
 };
-
-// Method borrowing
-foo.calcAge = some.calcAge;
-
-foo.calcAge(); // 'foo' object
+addExpression(2, 5);
+addExpression(2, 5, 6, 7);
