@@ -31,37 +31,68 @@
 // // console.log(age) // Do not have access
 // // printAge() // Do not have access
 
-// Variables hoisting
-console.log(me); // Undefined
-console.log(job); // ReferenceError
-console.log(year); // ReferenceError
+// // Variables hoisting
+// console.log(me); // Undefined
+// console.log(job); // ReferenceError
+// console.log(year); // ReferenceError
 
-var me = 'Some';
-let job = 'foo';
-const year = 1991;
+// var me = 'Some';
+// let job = 'foo';
+// const year = 1991;
 
-// Functions hoisting
-console.log(addDecl(2, 4)); // 6
-console.log(addExpr(2, 4)); // ReferenceError
-console.log(addExpr(2, 4)); // ReferenceError
-console.log(addArrow(2, 4)); // ReferenceError
+// // Functions hoisting
+// console.log(addDecl(2, 4)); // 6
+// console.log(addExpr(2, 4)); // ReferenceError
+// console.log(addExpr(2, 4)); // ReferenceError
+// console.log(addArrow(2, 4)); // ReferenceError
 
-function addDecl(a, b) {
-  return a + b;
-}
+// function addDecl(a, b) {
+//   return a + b;
+// }
 
-const addExpr = function (a, b) {
-  return a + b;
+// const addExpr = function (a, b) {
+//   return a + b;
+// };
+
+// var addArrow = (a, b) => a + b;
+
+// // Example that causes bug!, to avoid made de variables declaration in the beggining of scope
+
+// if (!numProducts) deleteShoppingCart();
+
+// var numProducts = 10;
+
+// function deleteShoppingCart() {
+//   console.log('All products deleted');
+// }
+
+console.log(this); // POints to window
+
+const calcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this); // Undefined
+};
+calcAge(1991);
+
+const calcAgeArrow = birthYear => {
+  console.log(2037 - birthYear);
+  console.log(this); // Window (lexical this)
+};
+calcAgeArrow(1991);
+
+const some = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+  },
+};
+some.calcAge(); // 'some' object
+
+const foo = {
+  year: 2017,
 };
 
-var addArrow = (a, b) => a + b;
+// Method borrowing
+foo.calcAge = some.calcAge;
 
-// Example that causes bug!, to avoid made de variables declaration in the beggining of scope
-
-if (!numProducts) deleteShoppingCart();
-
-var numProducts = 10;
-
-function deleteShoppingCart() {
-  console.log('All products deleted');
-}
+foo.calcAge(); // 'foo' object
