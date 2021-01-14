@@ -97,46 +97,95 @@
 
 // foo.calcAge(); // 'foo' object
 
+// const some = {
+//   firstName: 'some',
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//     // const isMillenial = function () {
+//     //     console.log(this); // undefined
+//     //   console.log(this.year >= 1981 && this.year <= 1996);
+//     // };
+//     // first solution: use an aux variable
+//     // const self = this; // self or that
+//     // const isMillenial = function () {
+//     //     console.log(self); // undefined
+//     //   console.log(self.year >= 1981 && self.year <= 1996);
+//     // };
+//     // second solution: arrow
+//     const isMillenial = () => {
+//       console.log(this); // undefined
+//       console.log(this.year >= 1981 && this.year <= 1996);
+//     };
+//     isMillenial();
+//   },
+
+//   //   greet: () => {
+//   //     console.log(this); // window
+//   //     console.log(`hey ${this.firstName}`); // hey undifined
+//   //   },
+//   greet: function (params) {
+//     console.log(this); // window
+//     console.log(`hey ${this.firstName}`); // hey some
+//   },
+// };
+// some.greet();
+// some.calcAge();
+// console.log(this); // window
+
+// //Arguments keyword
+// const addExpression = function addExp(a, b) {
+//   console.log(arguments);
+//   return a + b;
+// };
+// addExpression(2, 5);
+// addExpression(2, 5, 6, 7);
+
+// let age = 39;
+// let oldAge = age;
+// age = 31;
+// console.log(age);
+// console.log(oldAge);
+
+// const me = {
+//   name: 'some',
+//   age: 30,
+// };
+
+// const foo = me;
+// foo.age = 27; //Change the 2 object's age
+// console.log('foo', foo);
+// console.log('some', some);
+
+// Primitive
+let lastName = 'foo';
+let oldLastName = lastName;
+lastName = 'faa';
+console.log(lastName, oldLastName);
+
+// Reference
 const some = {
-  firstName: 'some',
-  year: 1991,
-  calcAge: function () {
-    console.log(this);
-    // const isMillenial = function () {
-    //     console.log(this); // undefined
-    //   console.log(this.year >= 1981 && this.year <= 1996);
-    // };
-    // first solution: use an aux variable
-    // const self = this; // self or that
-    // const isMillenial = function () {
-    //     console.log(self); // undefined
-    //   console.log(self.year >= 1981 && self.year <= 1996);
-    // };
-    // second solution: arrow
-    const isMillenial = () => {
-      console.log(this); // undefined
-      console.log(this.year >= 1981 && this.year <= 1996);
-    };
-    isMillenial();
-  },
-
-  //   greet: () => {
-  //     console.log(this); // window
-  //     console.log(`hey ${this.firstName}`); // hey undifined
-  //   },
-  greet: function (params) {
-    console.log(this); // window
-    console.log(`hey ${this.firstName}`); // hey some
-  },
+  fisrtName: 'some',
+  lastName: 'foo',
+  age: 27,
 };
-some.greet();
-some.calcAge();
-console.log(this); // window
+const marriedSome = some;
+marriedSome.lastName = 'faa';
+console.log('Before marriage', some);
+console.log('After marriage', marriedSome);
 
-//Arguments keyword
-const addExpression = function addExp(a, b) {
-  console.log(arguments);
-  return a + b;
+// marriedSome = {};
+
+// Copying objects
+const some2 = {
+  fisrtName: 'some',
+  lastName: 'foo',
+  age: 27,
+  family: ['a', 'b'],
 };
-addExpression(2, 5);
-addExpression(2, 5, 6, 7);
+const someCopy = Object.assign({}, some2);
+someCopy.lastName = 'faa';
+someCopy.family.push('c');
+someCopy.family.push('d');
+console.log('Before marriage', some2);
+console.log('After marriage', someCopy);
