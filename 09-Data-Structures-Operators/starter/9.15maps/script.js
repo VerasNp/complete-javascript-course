@@ -45,7 +45,7 @@ const restaurant = {
 const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 /**
- * MAPS
+ * MAPS FUNDAMENTALS
  * Use to map values into keys
  * In maps the keys can have any type
  */
@@ -84,3 +84,33 @@ console.log(rest);
 
 rest.set(document.querySelector("h1"), "Heading");
 console.log(rest);
+
+/**
+ * MAPS ITERATIONS
+ * Another way to set values into an map is to set a bunch of arrays
+ */
+const question = new Map([
+    ["question", "Foo?"],
+    [1, "C"],
+    [2, "B"],
+    [3, "A"],
+    ["correct", 3],
+    [true, "Correct"],
+    [false, "Try again"],
+]);
+
+// Convert object to maps
+const hoursMap = new Map(Object.entries(restaurant.openingHours));
+console.log(hoursMap);
+
+console.log(question.get("question"));
+for (const [key, value] of question) {
+    if (typeof key === "number") {
+        console.log(`Answer ${key}: ${value}`);
+    }
+}
+const answer = Number(prompt("Your answer"));
+console.log(question.get(question.get("correct") === answer));
+
+// Convert map to array
+console.log([...question]);
